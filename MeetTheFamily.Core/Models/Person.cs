@@ -123,6 +123,30 @@ namespace MeetTheFamily.Core.Models
                 return new ReadOnlyCollection<Person>(cousins);
             }
         }
+
+        public ReadOnlyCollection<Person> BrotherInLaw
+        {
+            get
+            {
+                var spouseBrother = this.Spouse.GetSiblingsByGender(Gender.Male);
+                var femaleSiblings = this.GetSiblingsByGender(Gender.Female);
+                var husbandOfSiblings = femaleSiblings.Select(x => x.Spouse);
+                var brotherInLaw = spouseBrother.Concat(husbandOfSiblings).ToList();
+                return new ReadOnlyCollection<Person>(brotherInLaw);
+            }
+        }
+
+        public ReadOnlyCollection<Person> SisterInLaw
+        {
+            get
+            {
+                var spouseSister = this.Spouse.GetSiblingsByGender(Gender.Female);
+                var maleSiblings = this.GetSiblingsByGender(Gender.Male);
+                var wiviesOfSiblings = maleSiblings.Select(x => x.Spouse);
+                var brotherInLaw = spouseSister.Concat(wiviesOfSiblings).ToList();
+                return new ReadOnlyCollection<Person>(brotherInLaw);
+            }
+        }
         private List<Person> GetChildrenByGender(Gender gender)
         {
             return this.Childrens.Where(x => x.Gender == gender).ToList();
