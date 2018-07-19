@@ -77,159 +77,215 @@ namespace MeetTheFamily.UnitTests
             Assert.AreEqual(_root.Spouse, spouse);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "root " + ExceptionMessage.NO_CHILDREN)]
-        public void Should_ThrowException_WhenThereIsNoChildre()
-        {
-            //act
-            var children = _root.Childrens;
-        }
-        [TestMethod]
-        public void Should_Return_Brothers()
-        {
-            //arrange
-            AddSpouse();
-            var firstChild = AddChildrenAndReturnFirstChild();
+        //         [TestMethod]
+        //         [ExpectedException(typeof(Exception), "root " + ExceptionMessage.NO_CHILDREN)]
+        //         public void Should_ThrowException_WhenThereIsNoChildre()
+        //         {
+        //             //act
+        //             var children = _root.Childrens;
+        //         }
+        //         [TestMethod]
+        //         public void Should_Return_Brothers()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             var firstChild = AddChildrenAndReturnFirstChild();
 
-            //act
-            var brothers = firstChild.Brothers;
+        //             //act
+        //             var brothers = firstChild.Brothers;
 
-            //assert
-            Assert.AreEqual(2, brothers.Count);
-        }
+        //             //assert
+        //             Assert.AreEqual(2, brothers.Count);
+        //         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "child1" + ExceptionMessage.NO_BROTHER)]
-        public void Should_ThrowException_WhenGettingBrothersCurrentIsOnlyMaleChild()
-        {
-            //arrange
-            AddSpouse();
-            var firstChild = _root.Spouse.AddChild("child1", Gender.Male);
-            _root.Spouse.AddChild("child2", Gender.Female);
+        //         [TestMethod]
+        //         [ExpectedException(typeof(Exception), "child1" + ExceptionMessage.NO_BROTHER)]
+        //         public void Should_ThrowException_WhenGettingBrothersCurrentIsOnlyMaleChild()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             var firstChild = _root.Spouse.AddChild("child1", Gender.Male);
+        //             _root.Spouse.AddChild("child2", Gender.Female);
 
-            //act
-            var brothers = firstChild.Brothers;
+        //             //act
+        //             var brothers = firstChild.Brothers;
 
-            //assert
+        //             //assert
 
-        }
+        //         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "child1" + ExceptionMessage.NO_SISTER)]
-        public void Should_ThrowException_WhenGettingSistersCurrentIsOnlyFemailChild()
-        {
-            //arrange
-            AddSpouse();
-            _root.Spouse.AddChild("child1", Gender.Male);
-            var firstChild = _root.Spouse.AddChild("child2", Gender.Female);
+        //         [TestMethod]
+        //         [ExpectedException(typeof(Exception), "child1" + ExceptionMessage.NO_SISTER)]
+        //         public void Should_ThrowException_WhenGettingSistersCurrentIsOnlyFemailChild()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             _root.Spouse.AddChild("child1", Gender.Male);
+        //             var firstChild = _root.Spouse.AddChild("child2", Gender.Female);
 
-            //act
-            var brothers = firstChild.Sisters;
+        //             //act
+        //             var brothers = firstChild.Sisters;
 
-            //assert
+        //             //assert
 
-        }
+        //         }
 
-        [TestMethod]
-        public void Should_Return_Sisters()
-        {
-            //arrange
-            AddSpouse();
-            var firstChild = AddChildrenAndReturnFirstChild();
+        //         [TestMethod]
+        //         public void Should_Return_Sisters()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             var firstChild = AddChildrenAndReturnFirstChild();
 
-            //act
-            var sisters = firstChild.Sisters;
+        //             //act
+        //             var sisters = firstChild.Sisters;
 
-            //assert
-            Assert.AreEqual(2, sisters.Count);
-        }
+        //             //assert
+        //             Assert.AreEqual(2, sisters.Count);
+        //         }
 
-        [TestMethod]
-        public void Should_Return_Sons()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            //act
-            var sons = _root.Sons;
+        //         [TestMethod]
+        //         public void Should_Return_Sons()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             //act
+        //             var sons = _root.Sons;
 
-            //assert
-            Assert.AreEqual(3, sons.Count);
-        }
-        [TestMethod]
-        public void Should_Return_Daughter()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            //act
-            var daugters = _root.Daughters;
+        //             //assert
+        //             Assert.AreEqual(3, sons.Count);
+        //         }
+        //         [TestMethod]
+        //         public void Should_Return_Daughter()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             //act
+        //             var daugters = _root.Daughters;
 
-            //assert
-            Assert.AreEqual(2, daugters.Count);
-        }
+        //             //assert
+        //             Assert.AreEqual(2, daugters.Count);
+        //         }
 
-        [TestMethod]
-        public void Should_Return_GrandDaughter()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            AddGrandChildrenAndReturnOneGrandChild();
+        //         [TestMethod]
+        //         public void Should_Return_GrandDaughter()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             AddGrandChildrenAndReturnOneGrandChild();
 
-            //act
-            var grandDaughter = _root.GrandDaughters;
-            //assert
-            Assert.AreEqual(2, grandDaughter.Count);
-        }
+        //             //act
+        //             var grandDaughter = _root.GrandDaughters;
+        //             //assert
+        //             Assert.AreEqual(2, grandDaughter.Count);
+        //         }
 
-        [TestMethod]
-        public void Should_Return_Cousins()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            var grandChild = AddGrandChildrenAndReturnOneGrandChild();
+        //         [TestMethod]
+        //         public void Should_Return_Cousins()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             var grandChild = AddGrandChildrenAndReturnOneGrandChild();
 
-            //act
-            var cousins = grandChild.Cousins;
-            //assert
-            Assert.AreEqual(2, cousins.Count);
-        }
+        //             //act
+        //             var cousins = grandChild.Cousins;
+        //             //assert
+        //             Assert.AreEqual(2, cousins.Count);
+        //         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "Grand daughter 2 " + ExceptionMessage.NO_COUSINS)]
-        public void Should_ThrowException_WhenConsinsDoesNotExists()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            var grandChild = AddGrandSon();
+        //         [TestMethod]
+        //         [ExpectedException(typeof(Exception), "Grand daughter 2 " + ExceptionMessage.NO_COUSINS)]
+        //         public void Should_ThrowException_WhenConsinsDoesNotExists()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             var grandChild = AddGrandSon();
 
-            //act
-            var cousins = grandChild.Cousins;
+        //             //act
+        //             var cousins = grandChild.Cousins;
 
-        }
+        //         }
 
 
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "root " + ExceptionMessage.NO_GRANDDAUGHTER)]
-        public void Should_ThrowException_WhenGrandDaughterIsNotThere()
-        {
-            //arrange
-            AddChildrenAndReturnFirstChild();
-            //act
-            var grandDaughter = _root.GrandDaughters;
-        }
+        //         [TestMethod]
+        //         [ExpectedException(typeof(Exception), "root " + ExceptionMessage.NO_GRANDDAUGHTER)]
+        //         public void Should_ThrowException_WhenGrandDaughterIsNotThere()
+        //         {
+        //             //arrange
+        //             AddChildrenAndReturnFirstChild();
+        //             //act
+        //             var grandDaughter = _root.GrandDaughters;
+        //         }
 
-        private Person AddChildrenAndReturnFirstChild()
-        {
-            AddSpouse();
-            var firstChild = _root.AddChild("Male1", Gender.Male);
-            _root.AddChild("Male2", Gender.Male);
-            _root.AddChild("Male3", Gender.Male);
-            _root.AddChild("Female1", Gender.Female);
-            _root.AddChild("Female2", Gender.Female);
-            return firstChild;
-        }
+        //         [TestMethod]
+        //         public void Should_Return_BroterInLawsOfWife()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             var male1 = _root.AddChild("Male1", Gender.Male);
+        //             var male2 = _root.AddChild("Male2", Gender.Male);
+        //             _root.AddChild("Male3", Gender.Male);
+        //             var male1Wife = Person.Create("Male1Spouse", Gender.Female);
+        //             male1.Spouse = male1Wife;
 
-        private void AssertNewlyAddedChild(Person child)
+        //             //act
+        //             var brotherInLaws = male1Wife.BrotherInLaw;
+        //             //assert
+        //             Assert.AreEqual(2, brotherInLaws.Count);
+        //             Assert.IsTrue(brotherInLaws.Contains(male2));
+        //         }
+        //         [TestMethod]
+        //         public void Should_Return_BroterInLawsOfSister()
+        //         {
+        //             //arrange
+        //             AddSpouse();
+        //             var female1 = _root.AddChild("Female1", Gender.Female);
+        //             var female2 = _root.AddChild("Female2", Gender.Female);
+        //             var husbandOffemale2 = Person.Create("Husband1", Gender.Male);
+        //             female2.Spouse = husbandOffemale2;
+        //             var female3 = _root.AddChild("Female3", Gender.Female);
+        //             var husbandOffemale3 = Person.Create("Husband2", Gender.Male);
+        //             var male1 = _root.AddChild("male1", Gender.Male);
+
+        //             _root.AddChild("Male3", Gender.Male);
+
+
+        //             //act
+        //             var brotherInLaws = female1.BrotherInLaw;
+        //             //assert
+        //             Assert.AreEqual(2, brotherInLaws.Count);
+        //             Assert.IsTrue(brotherInLaws.Contains(husbandOffemale2));
+        //             Assert.IsTrue(brotherInLaws.Contains(husbandOffemale3));
+        //         }
+
+        //         private Person AddChildrenAndReturnFirstChild()
+        //         {
+        //             AddSpouse();
+        //             var firstChild = _root.AddChild("Male1", Gender.Male);
+        //             _root.AddChild("Male2", Gender.Male);
+        //             _root.AddChild("Male3", Gender.Male);
+        //             _root.AddChild("Female1", Gender.Female);
+        //             _root.AddChild("Female2", Gender.Female);
+        //             return firstChild;
+        //         }
+
+        //         private Person AddGrandChildrenAndReturnOneGrandChild()
+        //         {
+        //             var daughter = _root.Daughters[0];
+        //             daughter.Spouse = Person.Create("Spouse1", Gender.Male);
+        //             daughter.AddChild("Grand son 1", Gender.Male);
+        //             daughter.AddChild("Grand daughter 1", Gender.Female);
+        //             return AddGrandSon();
+        //         }
+
+        //         private Person AddGrandSon()
+        //         {
+        //             var son = _root.Sons[0];
+        //             son.Spouse = Person.Create("Spouse2", Gender.Female);
+        //             return son.AddChild("Grand daughter 2", Gender.Female);
+        //         }
+        private void AssertNewlyAddedChild(IPerson child)
         {
             Assert.IsNotNull(child);
             Assert.AreEqual(child.Name, "child");
@@ -245,20 +301,6 @@ namespace MeetTheFamily.UnitTests
             _root.SetSpouse(spouse);
         }
 
-        private Person AddGrandChildrenAndReturnOneGrandChild()
-        {
-            var daughter = _root.Daughters[0];
-            daughter.Spouse = Person.Create("Spouse1", Gender.Male);
-            daughter.AddChild("Grand son 1", Gender.Male);
-            daughter.AddChild("Grand daughter 1", Gender.Female);
-            return AddGrandSon();
-        }
 
-        private Person AddGrandSon()
-        {
-            var son = _root.Sons[0];
-            son.Spouse = Person.Create("Spouse2", Gender.Female);
-            return son.AddChild("Grand daughter 2", Gender.Female);
-        }
     }
 }
